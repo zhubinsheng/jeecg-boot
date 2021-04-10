@@ -1,5 +1,7 @@
 package org.jeecg.modules.system.controller;
 
+import cn.hutool.core.io.resource.InputStreamResource;
+import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +30,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * <p>
  * 用户表 前端控制器
@@ -41,6 +46,7 @@ import java.net.URLDecoder;
 @RequestMapping("/sys/common")
 public class CommonController {
 
+    private static final String UPLOAD_PATH = "http://123.57.131.113:8080/group1/upload";
     @Autowired
     private ISysBaseAPI sysBaseAPI;
 
@@ -61,6 +67,12 @@ public class CommonController {
     public Result<?> noauth()  {
         return Result.error("没有权限，请联系管理员授权");
     }
+
+
+//    @RequestMapping("/upload")
+//    public String  upload(MultipartFile file) {
+//
+//    }
 
     /**
      * 文件上传统一方法
@@ -123,37 +135,59 @@ public class CommonController {
      * @return
      */
     private String uploadLocal(MultipartFile mf,String bizPath){
+        String result = "";
+        String name = "";
         try {
-            String ctxPath = uploadpath;
-            String fileName = null;
-            File file = new File(ctxPath + File.separator + bizPath + File.separator );
-            if (!file.exists()) {
-                file.mkdirs();// 创建文件根目录
-            }
-            String orgName = mf.getOriginalFilename();// 获取文件名
-            orgName = CommonUtils.getFileName(orgName);
-            if(orgName.indexOf(".")!=-1){
-                fileName = orgName.substring(0, orgName.lastIndexOf(".")) + "_" + System.currentTimeMillis() + orgName.substring(orgName.indexOf("."));
-            }else{
-                fileName = orgName+ "_" + System.currentTimeMillis();
-            }
-            String savePath = file.getPath() + File.separator + fileName;
-            File savefile = new File(savePath);
-            FileCopyUtils.copy(mf.getBytes(), savefile);
-            String dbpath = null;
-            if(oConvertUtils.isNotEmpty(bizPath)){
-                dbpath = bizPath + File.separator + fileName;
-            }else{
-                dbpath = fileName;
-            }
-            if (dbpath.contains("\\")) {
-                dbpath = dbpath.replace("\\", "/");
-            }
-            return dbpath;
+            InputStreamResource isr = new InputStreamResource(mf.getInputStream(),
+                    mf.getOriginalFilename());
+
+            Map<String, Object> params = new HashMap<>();
+            params.put("file", isr);
+            params.put("path", "86501729");
+            params.put("output", "json");
+            String resp = HttpUtil.post(UPLOAD_PATH, params);
+            log.info("resp:" + resp);
+            result = resp;
+            JSONObject json = JSONObject.parseObject(result);
+            name = json.getString("url");
+            log.info("url:" + name);
+
         } catch (IOException e) {
-            log.error(e.getMessage(), e);
+            e.printStackTrace();
         }
-        return "";
+
+        return name;
+//        try {
+//            String ctxPath = uploadpath;
+//            String fileName = null;
+//            File file = new File(ctxPath + File.separator + bizPath + File.separator );
+//            if (!file.exists()) {
+//                file.mkdirs();// 创建文件根目录
+//            }
+//            String orgName = mf.getOriginalFilename();// 获取文件名
+//            orgName = CommonUtils.getFileName(orgName);
+//            if(orgName.indexOf(".")!=-1){
+//                fileName = orgName.substring(0, orgName.lastIndexOf(".")) + "_" + System.currentTimeMillis() + orgName.substring(orgName.indexOf("."));
+//            }else{
+//                fileName = orgName+ "_" + System.currentTimeMillis();
+//            }
+//            String savePath = file.getPath() + File.separator + fileName;
+//            File savefile = new File(savePath);
+//            FileCopyUtils.copy(mf.getBytes(), savefile);
+//            String dbpath = null;
+//            if(oConvertUtils.isNotEmpty(bizPath)){
+//                dbpath = bizPath + File.separator + fileName;
+//            }else{
+//                dbpath = fileName;
+//            }
+//            if (dbpath.contains("\\")) {
+//                dbpath = dbpath.replace("\\", "/");
+//            }
+//            return dbpath;
+//        } catch (IOException e) {
+//            log.error(e.getMessage(), e);
+//        }
+//        return "";
     }
 
 //	@PostMapping(value = "/upload2")

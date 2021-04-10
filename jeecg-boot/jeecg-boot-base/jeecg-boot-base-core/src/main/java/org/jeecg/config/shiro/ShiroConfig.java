@@ -118,6 +118,9 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/bigscreen/**", "anon");
 
         //测试示例
+        filterChainDefinitionMap.put("/apartmentInfo/apartmentInfo/**", "anon"); //mock api
+        filterChainDefinitionMap.put("/test/jeecgDemo/**", "anon"); //mock api
+        filterChainDefinitionMap.put("/mock/api/**", "anon"); //mock api
         filterChainDefinitionMap.put("/test/bigScreen/**", "anon"); //大屏模板例子
         //filterChainDefinitionMap.put("/test/jeecgDemo/rabbitMqClientTest/**", "anon"); //MQ测试
         //filterChainDefinitionMap.put("/test/jeecgDemo/html", "anon"); //模板页面

@@ -2,5 +2,7 @@ server:
   #微服务端口
   port: 7001
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: jeecg-system
