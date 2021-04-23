@@ -16,12 +16,12 @@
   import { mixin } from '@/utils/mixin.js'
 
   export default {
-    name: 'Logo',
+    // name: 'Logo',
     mixins: [mixin],
     props: {
       title: {
         type: String,
-        default: 'Jeecg-Boot Pro',
+        default: 'awinic',
         required: false
       },
       showTitle: {

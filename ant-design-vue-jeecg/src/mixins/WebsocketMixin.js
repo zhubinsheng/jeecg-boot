@@ -4,7 +4,7 @@ import Vue from 'vue'
 
 export const WebsocketMixin = {
   mounted() {
-    this.initWebSocket();
+    // this.initWebSocket();
   },
   destroyed: function () {
     // 离开页面生命周期函数
