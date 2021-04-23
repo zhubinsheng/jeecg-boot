@@ -354,13 +354,13 @@
                 <!--配置文件前缀-->
                 <prefix.name>jeecg</prefix.name>
                 <!--Nacos配置中心地址-->
-                <config.server-addr>127.0.0.1:8848</config.server-addr>
+                <config.server-addr>10.1.48.146:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
                 <config.namespace></config.namespace>
                 <!--Nacos配置分组名称-->
                 <config.group>DEFAULT_GROUP</config.group>
                 <!--Nacos服务发现地址-->
-                <discovery.server-addr>127.0.0.1:8848</discovery.server-addr>
+                <discovery.server-addr>10.1.48.146:8848</discovery.server-addr>
             </properties>
         </profile>
         <!-- 测试 -->
@@ -372,13 +372,13 @@
                 <!--配置文件前缀-->
                 <prefix.name>jeecg</prefix.name>
                 <!--Nacos配置中心地址-->
-                <config.server-addr>123.57.131.113:8848</config.server-addr>
+                <config.server-addr>10.1.48.146:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
                 <config.namespace></config.namespace>
                 <!--Nacos配置分组名称-->
                 <config.group>DEFAULT_GROUP</config.group>
                 <!--Nacos服务发现地址-->
-                <discovery.server-addr>123.57.131.113:8848</discovery.server-addr>
+                <discovery.server-addr>10.1.48.146:8848</discovery.server-addr>
             </properties>
         </profile>
         <!-- 生产 -->
@@ -390,13 +390,13 @@
                 <!--配置文件前缀-->
                 <prefix.name>jeecg</prefix.name>
                 <!--Nacos配置中心地址-->
-                <config.server-addr>127.0.0.1:8848</config.server-addr>
+                <config.server-addr>10.1.48.146:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
                 <config.namespace></config.namespace>
                 <!--Nacos配置分组名称-->
                 <config.group>DEFAULT_GROUP</config.group>
                 <!--Nacos服务发现地址-->
-                <discovery.server-addr>127.0.0.1:8848</discovery.server-addr>
+                <discovery.server-addr>10.1.48.146:8848</discovery.server-addr>
             </properties>
         </profile>
     </profiles>

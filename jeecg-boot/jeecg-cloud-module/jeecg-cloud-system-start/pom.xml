@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>jeecg-cloud-system-start</artifactId>
     <description>System项目微服务启动</description>
+<!--    <packaging>war</packaging>-->
 
     <dependencies>
         <!-- 引入jeecg-boot-starter-cloud依赖 -->
@@ -30,25 +31,33 @@
             <artifactId>jeecg-boot-module-system</artifactId>
         </dependency>
 
-        <!--rabbitmq消息队列-->
-        <dependency>
-            <groupId>org.jeecgframework.boot</groupId>
-            <artifactId>jeecg-boot-starter-rabbitmq</artifactId>
-        </dependency>
-        <!--xxl-job定时任务-->
-        <dependency>
-            <groupId>org.jeecgframework.boot</groupId>
-            <artifactId>jeecg-boot-starter-job</artifactId>
-        </dependency>
-        <!-- 分布式锁依赖 -->
-        <dependency>
-            <groupId>org.jeecgframework.boot</groupId>
-            <artifactId>jeecg-boot-starter-lock</artifactId>
-        </dependency>
+<!--        &lt;!&ndash;rabbitmq消息队列&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.jeecgframework.boot</groupId>-->
+<!--            <artifactId>jeecg-boot-starter-rabbitmq</artifactId>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash;xxl-job定时任务&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.jeecgframework.boot</groupId>-->
+<!--            <artifactId>jeecg-boot-starter-job</artifactId>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; 分布式锁依赖 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.jeecgframework.boot</groupId>-->
+<!--            <artifactId>jeecg-boot-starter-lock</artifactId>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.apache.tomcat</groupId>-->
+<!--            <artifactId>tomcat-servlet-api</artifactId>-->
+<!--            <version>8.0.36</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
 
     </dependencies>
 
     <build>
+<!--        <finalName>cloudsystem</finalName>-->
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
