@@ -1,4 +1,4 @@
-<#include "/common/utils.ftl">
+<#include "/common/com.awinic.paymodule.utils.ftl">
 <template>
   <a-spin :spinning="confirmLoading">
     <j-form-container :disabled="formDisabled">
@@ -149,8 +149,8 @@
   import { getAction } from '@/api/manage'
   import { JVxeTableModelMixin } from '@/mixins/JVxeTableModelMixin.js'
   import { JVXETypes } from '@/components/jeecg/JVxeTable'
-  import { getRefPromise,VALIDATE_FAILED} from '@/components/jeecg/JVxeTable/utils/vxeUtils.js'
-  import { validateDuplicateValue } from '@/utils/util'
+  import { getRefPromise,VALIDATE_FAILED} from '@/components/jeecg/JVxeTable/com.awinic.paymodule.utils/vxeUtils.js'
+  import { validateDuplicateValue } from '@/com.awinic.paymodule.utils/util'
   import JFormContainer from '@/components/jeecg/JFormContainer'
   <#list subTables as sub>
   <#if sub.foreignRelationType =='1'>

@@ -1,4 +1,4 @@
-<#include "/common/utils.ftl">
+<#include "/common/com.awinic.paymodule.utils.ftl">
 <template>
   <j-modal
     :title="title"
@@ -116,7 +116,7 @@
 <script>
 
   import { httpAction } from '@/api/manage'
-  import { validateDuplicateValue } from '@/utils/util'
+  import { validateDuplicateValue } from '@/com.awinic.paymodule.utils/util'
   export default {
     name: "${entityName}Modal",
     components: { 

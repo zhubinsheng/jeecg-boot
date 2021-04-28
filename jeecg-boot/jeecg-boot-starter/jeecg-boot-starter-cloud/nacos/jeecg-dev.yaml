@@ -48,7 +48,7 @@ spring:
   #redis 配置
   redis:
     database: 0
-    host: jeecg-boot-redis
+    host: 123.57.131.113
     lettuce:
       pool:
         max-active: 8   #最大连接数据库连接数,设 0 为没有限制
@@ -132,8 +132,11 @@ jeecg :
     appsecret: ??
   #xxl-job配置
   xxljob:
-    enabled: false
-    adminAddresses: http://jeecg-boot-xxljob:9080/xxl-job-admin
+    enabled: true
+    adminAddresses: http://127.0.0.1:49161/xxl-job-admin
+    address: 127.0.0.1:30007
+    ip: 127.0.0.1
+    port: 30007
     appname: ${spring.application.name}
     accessToken: ''
     logPath: logs/jeecg/job/jobhandler/
@@ -146,7 +149,7 @@ jeecg :
       data-type: nacos
   #分布式锁配置
   redisson:
-    address: jeecg-boot-redis:6379
+    address: 123.57.131.113:6379
     password:
     type: STANDALONE
     enabled: true

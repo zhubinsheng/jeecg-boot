@@ -37,10 +37,10 @@
 <!--            <artifactId>jeecg-boot-starter-rabbitmq</artifactId>-->
 <!--        </dependency>-->
 <!--        &lt;!&ndash;xxl-job定时任务&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.jeecgframework.boot</groupId>-->
-<!--            <artifactId>jeecg-boot-starter-job</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.jeecgframework.boot</groupId>
+            <artifactId>jeecg-boot-starter-job</artifactId>
+        </dependency>
 <!--        &lt;!&ndash; 分布式锁依赖 &ndash;&gt;-->
 <!--        <dependency>-->
 <!--            <groupId>org.jeecgframework.boot</groupId>-->

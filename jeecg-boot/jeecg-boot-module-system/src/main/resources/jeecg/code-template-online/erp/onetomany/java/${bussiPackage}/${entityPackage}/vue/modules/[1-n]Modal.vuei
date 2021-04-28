@@ -1,4 +1,4 @@
-<#include "/common/utils.ftl">
+<#include "/common/com.awinic.paymodule.utils.ftl">
 <#list subTables as sub>
 #segment#${sub.entityName}Modal.vue
 <template>
@@ -96,7 +96,7 @@
 <script>
 
   import { httpAction } from '@/api/manage'
-  import { validateDuplicateValue } from '@/utils/util'
+  import { validateDuplicateValue } from '@/com.awinic.paymodule.utils/util'
 
   export default {
     name: "${sub.entityName}Modal",

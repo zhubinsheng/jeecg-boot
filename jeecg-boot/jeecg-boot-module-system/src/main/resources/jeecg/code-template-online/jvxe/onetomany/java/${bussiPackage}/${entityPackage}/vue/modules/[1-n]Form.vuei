@@ -1,4 +1,4 @@
-<#include "/common/utils.ftl">
+<#include "/common/com.awinic.paymodule.utils.ftl">
 <#list subTables as sub>
 <#if sub.foreignRelationType=='1'>
 #segment#${sub.entityName}Form.vue
@@ -94,9 +94,9 @@
 </template>
 <script>
   import { getAction } from '@/api/manage'
-  import { validateDuplicateValue } from '@/utils/util'
+  import { validateDuplicateValue } from '@/com.awinic.paymodule.utils/util'
   import JFormContainer from '@/components/jeecg/JFormContainer'
- import { VALIDATE_FAILED } from '@/components/jeecg/JVxeTable/utils/vxeUtils.js'
+ import { VALIDATE_FAILED } from '@/components/jeecg/JVxeTable/com.awinic.paymodule.utils/vxeUtils.js'
   export default {
     name: '${sub.entityName}Form',
     components: {

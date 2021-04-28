@@ -215,7 +215,7 @@
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import ${entityName}Modal from './modules/${entityName}Modal'
   import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
-  import { filterObj } from '@/utils/util';
+  import { filterObj } from '@/com.awinic.paymodule.utils/util';
   <#if list_need_category>
   import { loadCategoryData } from '@/api/api'
   </#if>
@@ -508,7 +508,7 @@
         }
       },
       getSuperFieldList(){
-        <#include "/common/utils.ftl">
+        <#include "/common/com.awinic.paymodule.utils.ftl">
         let fieldList=[];
          <#list columns as po>
         fieldList.push(${superQueryFieldList(po)})
