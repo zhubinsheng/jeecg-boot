@@ -21,16 +21,21 @@ import org.jeecg.common.util.DySmsEnum;
 import org.jeecg.common.util.DySmsHelper;
 import org.jeecg.modules.ContractListManage.entity.ContractListManage;
 import org.jeecg.modules.ContractListManage.service.IContractListManageService;
+import org.jeecg.modules.billlist.entity.BillList;
+import org.jeecg.modules.billlist.service.IBillListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
-import static org.jeecg.common.util.DateUtils.formatTime;
+import static me.zhyd.oauth.utils.GlobalAuthUtils.getTimestamp;
+import static org.jeecg.common.util.DateUtils.*;
 
 
 /**
@@ -43,12 +48,28 @@ public class TestJobHandler {
     private IContractListManageService contractListManageService;
     @Autowired
     private ISysBaseAPI sysBaseAPI;
+    @Autowired
+    private IBillListService billListService;
     /**
      * 简单任务
      *
-     * @param params
-     * @return
      */
+
+    public static String getTimesMonthnightFisrt(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONDAY), cal.get(Calendar.DAY_OF_MONTH), 0, 0,0);
+        cal.set(Calendar.DAY_OF_MONTH,16);
+        cal.set(Calendar.HOUR_OF_DAY, 24);
+        return String.valueOf((cal.getTimeInMillis()/1000));
+
+    }
+    public static String getTimesMonthnight(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONDAY), cal.get(Calendar.DAY_OF_MONTH), 0, 0,0);
+        cal.set(Calendar.DAY_OF_MONTH,26);
+        cal.set(Calendar.HOUR_OF_DAY, 24);
+        return String.valueOf((cal.getTimeInMillis()/1000));
+    }
 
     @XxlJob(value = "testJob")
     public ReturnT<String> demoJobHandler(String params) throws ClientException {
@@ -57,6 +78,19 @@ public class TestJobHandler {
         log.info("contractListManageListSize>>>>"+contractListManageList.size());
 
         contractListManageList.forEach((contractListManage) -> {
+            if (!contractListManage.getTotalNumberOfBillingPeriods().equals(contractListManage.getNumberOfPeriodsReceived())){
+
+            }
+
+            //未达到总期数，但可能存在逾期状态
+            BillList billList = new BillList();
+            billList.setContractId(contractListManage.getId());
+            billList.setBillDay(getTimesMonthnightFisrt());
+            billList.setCreateBy("TestJobHandler");
+            billList.setCreateTime(getDate());
+            billList.setLatestDueDate(getTimesMonthnight());
+
+
             log.info("contractListManage.getUserId()>>>>"+contractListManage.getUserId());
             LoginUser loginUser = sysBaseAPI.getUserByName(contractListManage.getUserId());
             if (loginUser==null){
@@ -79,16 +113,21 @@ public class TestJobHandler {
             JSONObject obj = new JSONObject();
             obj.put("code", captcha);
             boolean sendSucc = false;
-            try {
-                sendSucc = DySmsHelper.sendSms(mobile, obj, DySmsEnum.REGISTER_TEMPLATE_CODE);
-            } catch (ClientException e) {
-                e.printStackTrace();
-            }finally {
-                if (!sendSucc){
-                }else {
+//            try {
+//                sendSucc = DySmsHelper.sendSms(mobile, obj, DySmsEnum.REGISTER_TEMPLATE_CODE);
+//            } catch (ClientException e) {
+//                e.printStackTrace();
+//            }finally {
+//                if (!sendSucc){
+//                }else {
+//
+//                }
+//            }
 
-                }
-            }
+            billList.setPrice("1700");
+
+            billList.setUserId(loginUser.getId());
+            billListService.save(billList);
             log.info("我执行完了...............................");
         });
 
