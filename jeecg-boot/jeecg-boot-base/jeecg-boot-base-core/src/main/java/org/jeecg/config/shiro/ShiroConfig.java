@@ -73,6 +73,10 @@ public class ShiroConfig {
         //pay module
         filterChainDefinitionMap.put("/bill/**", "anon"); //登录接口排除
 
+        filterChainDefinitionMap.put("/ContractListManage/contractListManage/add", "anon"); //微信验证
+        filterChainDefinitionMap.put("/sys/message/sysMessage/checkWxValid", "anon"); //微信验证
+        filterChainDefinitionMap.put("/sys/test/**", "anon"); //微信验证
+
         filterChainDefinitionMap.put("/sys/cas/client/validateLogin", "anon"); //cas验证登录
         filterChainDefinitionMap.put("/sys/randomImage/**", "anon"); //登录验证码接口排除
         filterChainDefinitionMap.put("/sys/checkCaptcha", "anon"); //登录验证码接口排除

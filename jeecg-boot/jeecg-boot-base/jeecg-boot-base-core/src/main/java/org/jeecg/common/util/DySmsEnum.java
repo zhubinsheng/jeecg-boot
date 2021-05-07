@@ -6,11 +6,15 @@ public enum DySmsEnum {
 	
 	LOGIN_TEMPLATE_CODE("SMS_175435174","JEECG","code"),
 	FORGET_PASSWORD_TEMPLATE_CODE("SMS_175435174","JEECG","code"),
-	REGISTER_TEMPLATE_CODE("SMS_175430166","JEECG","code"),
-	/**会议通知*/
-	MEET_NOTICE_TEMPLATE_CODE("SMS_201480469","H5活动之家","username,title,minute,time"),
-	/**我的计划通知*/
-	PLAN_NOTICE_TEMPLATE_CODE("SMS_201470515","H5活动之家","username,title,time");
+	REGISTER_TEMPLATE_CODE("SMS_190791554","carlin","code"),
+//	/**会议通知*/
+//	MEET_NOTICE_TEMPLATE_CODE("SMS_201480469","H5活动之家","username,title,minute,time"),
+//	/**我的计划通知*/
+//	PLAN_NOTICE_TEMPLATE_CODE("SMS_201470515","H5活动之家","username,title,time"),
+//	/**交房租模板*/
+	PLAN_NOTICE_TEMPLATE_CODE("SMS_216277721","carlin","name,year,month,help_phone,time");
+
+//	PAY_RENT_TEMPLATE_CODE("SMS_216277721","JEECG","name,year,month,helpphone,time");
 
 	/**
 	 * 短信模板编码

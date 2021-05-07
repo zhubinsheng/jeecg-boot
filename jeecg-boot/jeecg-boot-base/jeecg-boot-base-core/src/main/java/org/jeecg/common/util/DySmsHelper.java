@@ -67,7 +67,7 @@ public class DySmsHelper {
         
         //初始化acsClient,暂不支持region化
         IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
-        DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
+        DefaultProfile.addEndpoint( "cn-hangzhou", product, domain);
         IAcsClient acsClient = new DefaultAcsClient(profile);
         
         //验证json参数

@@ -7,8 +7,11 @@ import feign.codec.Encoder;
 import feign.form.spring.SpringFormEncoder;
 import lombok.extern.slf4j.Slf4j;
 import org.jeecg.common.constant.CommonConstant;
+import org.jeecg.common.system.util.JwtUtil;
+import org.jeecg.common.util.RedisUtil;
 import org.jeecg.config.FeignConfig;
 import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -30,6 +33,9 @@ import javax.servlet.http.HttpServletRequest;
 @Configuration
 public class FeignConfig {
 
+    @Autowired
+    private RedisUtil redisUtil;
+
     @Bean
     public RequestInterceptor requestInterceptor() {
         return requestTemplate -> {
@@ -43,6 +49,16 @@ public class FeignConfig {
                     token = request.getParameter("token");
                 }
                 log.info("Feign request token: {}", token);
+                requestTemplate.header(CommonConstant.X_ACCESS_TOKEN, token);
+            }else {
+                //行不通 https://github.com/zhangdaiscott/jeecg-boot/issues/2539
+                log.info("分布式定时任务执行的");
+                // 生成token
+                String token = JwtUtil.sign("admin", "123456");
+                // 设置token缓存有效时间
+                redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, token);
+                redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME*2 / 1000);
+
                 requestTemplate.header(CommonConstant.X_ACCESS_TOKEN, token);
             }
         };

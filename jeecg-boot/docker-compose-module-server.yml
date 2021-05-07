@@ -1,0 +1,70 @@
+version: '3'
+services:
+  jeecg-boot-nacos:
+    restart: on-failure
+    build:
+      context: ./jeecg-cloud-module/jeecg-cloud-nacos
+#    ports:
+#      - 8848:8848
+    network_mode: "host"
+    #    depends_on:
+    #      - jeecg-boot-mysql
+    container_name: jeecg-boot-nacos
+    hostname: jeecg-boot-nacos
+
+  jeecg-boot-gateway:
+    restart: on-failure
+    build:
+      context: ./jeecg-cloud-module/jeecg-cloud-gateway
+#    ports:
+#      - 9999:9999
+    network_mode: "host"
+    depends_on:
+      - jeecg-boot-nacos
+    #      - jeecg-boot-redis
+    container_name: jeecg-boot-gateway
+    hostname: jeecg-boot-gateway
+
+  jeecg-boot-system:
+    depends_on:
+    #      - jeecg-boot-mysql
+    #      - jeecg-boot-redis
+      - jeecg-boot-nacos
+#    ports:
+#      - 7001:7001
+    network_mode: "host"
+    build:
+      context: ./
+    container_name: jeecg-boot-system
+    hostname: jeecg-boot-system
+    restart: on-failure
+    environment:
+      - TZ=Asia/Shanghai
+
+  jeecg-boot-module-demo:
+    build:
+      context: ./jeecg-boot-module-demo
+    restart: on-failure
+    container_name: jeecg-boot-module-demo
+    image: jeecg-boot-module-demo
+    hostname: jeecg-boot-module-demo
+#    ports:
+#      - 7002:7002
+    network_mode: "host"
+
+  jeecg-boot-xxljob:
+    build:
+      context: ./jeecg-cloud-module/jeecg-cloud-xxljob
+#    ports:
+#      - 9080:9080
+    network_mode: "host"
+    container_name: jeecg-boot-xxljob
+    hostname: jeecg-boot-xxljob
+    restart: on-failure
+
+#networks:
+#  extnetwork:
+#    ipam:
+#      config:
+#        - subnet: 172.179.0.0/16
+#          gateway: 172.179.0.1

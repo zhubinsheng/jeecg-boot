@@ -5,9 +5,13 @@ import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.base.controller.JeecgController;
 import org.jeecg.common.system.query.QueryGenerator;
+import org.jeecg.common.util.SignUtil;
 import org.jeecg.modules.message.entity.SysMessage;
 import org.jeecg.modules.message.service.ISysMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +40,28 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/sys/message/sysMessage")
+@Api(tags="消息")
 public class SysMessageController extends JeecgController<SysMessage, ISysMessageService> {
+
 	@Autowired
 	private ISysMessageService sysMessageService;
+
+	@ApiOperation("wx测试")
+	@GetMapping(value = "/checkWxValid")
+	public String checkWeixinValid(@RequestParam(name="signature")String signature,
+
+								   @RequestParam(name="timestamp")String timestamp,
+
+								   @RequestParam(name="nonce")String nonce,
+
+								   @RequestParam(name="echostr")String echostr){
+		if (SignUtil.checkSignature(signature, timestamp, nonce)) {
+			return echostr;
+		}else {
+			return "error";
+		}
+//		return echostr;
+	}
 
 	/**
 	 * 分页列表查询

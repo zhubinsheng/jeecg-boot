@@ -19,13 +19,13 @@ services:
 #    ports:
 #      - 3306:3306
 
-  jeecg-boot-redis:
-    image: redis:5.0
-    ports:
-      - 6379:6379
-    restart: always
-    container_name: jeecg-boot-redis
-    hostname: jeecg-boot-redis
+#  jeecg-boot-redis:
+#    image: redis:5.0
+#    ports:
+#      - 6379:6379
+#    restart: always
+#    container_name: jeecg-boot-redis
+#    hostname: jeecg-boot-redis
 
   jeecg-boot-nacos:
     restart: on-failure
@@ -46,15 +46,17 @@ services:
       - 9999:9999
     depends_on:
       - jeecg-boot-nacos
-      - jeecg-boot-redis
+#      - jeecg-boot-redis
     container_name: jeecg-boot-gateway
     hostname: jeecg-boot-gateway
 
   jeecg-boot-system:
-    depends_on:
+#    depends_on:
 #      - jeecg-boot-mysql
-      - jeecg-boot-redis
-      - jeecg-boot-nacos
+#      - jeecg-boot-redis
+#      - jeecg-boot-nacos
+    ports:
+      - 7001:7001
     build:
       context: ./jeecg-cloud-system-start
     container_name: jeecg-boot-system
@@ -63,13 +65,24 @@ services:
     environment:
       - TZ=Asia/Shanghai
 
-#  jeecg-boot-xxljob:
+#  jeecg-boot-module-demo:
 #    build:
-#      context: ./jeecg-cloud-xxljob
+#      context: ./../jeecg-boot-module-demo
+#    restart: on-failure
+#    container_name: jeecg-boot-module-demo
+#    image: jeecg-boot-module-demo
+#    hostname: jeecg-boot-module-demo
 #    ports:
-#      - 9080:9080
-#    container_name: jeecg-boot-xxljob
-#    hostname: jeecg-boot-xxljob
+#      - 7002:7002
+
+  jeecg-boot-xxljob:
+    build:
+      context: ./jeecg-cloud-xxljob
+    ports:
+      - 9080:9080
+    container_name: jeecg-boot-xxljob
+    hostname: jeecg-boot-xxljob
+    restart: on-failure
 
 #  jeecg-boot-rabbitmq:
 #    #    image: rabbitmq:3-management

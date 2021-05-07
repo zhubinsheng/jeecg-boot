@@ -10,8 +10,8 @@ WORKDIR /jeecg-cloud-system
 
 EXPOSE 7001
 
-ADD ./../../jeecg-boot-module-system/src/main/resources/jeecg/ ./config/
+ADD ./jeecg-boot-module-system/src/main/resources/jeecg/ ./config/jeecg/
 
-ADD ./target/jeecg-cloud-system-start-2.4.3.jar ./
+ADD ./jeecg-cloud-module/jeecg-cloud-system-start/target/jeecg-cloud-system-start-2.4.3.jar ./
 
 CMD sleep 10;java -Dfile.encoding=utf-8 -Djava.security.egd=file:/dev/./urandom -jar jeecg-cloud-system-start-2.4.3.jar
